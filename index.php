@@ -2,9 +2,6 @@
 
 session_start();
 require('vendor/autoload.php');
-
-
-var_dump($_SESSION);
 unset($_SESSION['access_token']);
 $client = new Google_Client();
 $client->setAuthConfig('client_secret.json');

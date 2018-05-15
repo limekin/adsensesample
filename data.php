@@ -53,18 +53,22 @@ foreach($accounts as $account) {
             $endDate, $optParams);
 
             if (isset($report) && isset($report['rows'])) {
-                // Display headers.
-                foreach($report['headers'] as $header) {
-                printf('%25s', $header['name']);
-                }
-                print "<br/>";
-                // Display results.
-                foreach($report['rows'] as $row) {
-                foreach($row as $column) {
-                    printf('%25s', $column);
-                }
-                print "<br/><br/><br/>";
-                }
+                ?>
+
+                <table>
+                    <tr>
+                        <?php foreach($report['headers'] as $header): ?>
+                                <th><?php echo $header['name']; ?></th>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php foreach($report['rows'] as $row): ?>
+                        <tr>
+                            <?php foreach($row as $column): ?>
+                                <td><?php echo $column; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+            <?php
             } else {
                 print "No rows returned.\n";
             }
@@ -73,5 +77,6 @@ foreach($accounts as $account) {
     }
 
 }
+?>
 
 
