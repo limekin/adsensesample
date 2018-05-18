@@ -2,7 +2,7 @@
 
 session_start();
 require('vendor/autoload.php');
-$mysqli = new mysqli('127.0.0.1', 'your_user', 'your_pass', 'sakila');
+//$mysqli = new mysqli('127.0.0.1', 'your_user', 'your_pass', 'sakila');
 
 if(! isset($_SESSION['access_token'])) {
     header('Location: index.php');
@@ -10,9 +10,6 @@ if(! isset($_SESSION['access_token'])) {
 } else
     $access_token = $_SESSION['access_token'];
 
-
-
-    
 $client = new Google_Client();
 $client->setAuthConfig('client_secret.json');
 $client->setAccessType("offline");
@@ -40,6 +37,12 @@ foreach($accounts as $account) {
         foreach($urlChannels as $urlChannel) {
 
             $urlChannelId = $urlChannel->id;
+            
+            ?>
+
+            <h3>Url channel id: <?php echo $urlChannelId; ?> </h3>
+            <h4>Url pattern: <?php echo $urlChannel->urlPattern; ?></h4>
+        <?php 
             $optParams = array(
                 'metric' => array(
                 'CLICKS',
@@ -58,7 +61,6 @@ foreach($accounts as $account) {
 
             if (isset($report) && isset($report['rows'])) {
                 ?>
-
                 <table>
                     <tr>
                         <?php foreach($report['headers'] as $header): ?>
@@ -68,9 +70,11 @@ foreach($accounts as $account) {
                     <?php foreach($report['rows'] as $row): ?>
                     <?php
                         // Also make an insertion.
+                        /*
                         $query = "INSERT INTO stat (DATE, CLICKS, AD_REQUESTS_CTR, COST_PER_CLICK, AD_REQUEST_RPM, EARNINGS) ";
                         $query .= " VALUES ('$row[0]', '$row[1]', '$row[2]', '$row[3]', '$row[4]', '$row[5]')";
                         mysqli_query($mysqli, $query);
+                        */
                     ?>
                         <tr>
                             <?php foreach($row as $column): ?>
