@@ -3,12 +3,14 @@
 session_start();
 require('vendor/autoload.php');
 //$mysqli = new mysqli('127.0.0.1', 'your_user', 'your_pass', 'sakila');
-
+$_SESSION['access_token']='ya29.Glu_BQU-pA0QF9OrZvYtPGQtRhang6AJfQBMOzM7Y_b17RzgmmDsbCIoDG9xr5axt-Ql2HWlSwE7PaM9Fpr8Ljbf7nLZKIAGzGByNgZtYLNUOyclHFPEAuAtYA25';
 if(! isset($_SESSION['access_token'])) {
     header('Location: index.php');
     exit;
 } else
     $access_token = $_SESSION['access_token'];
+
+
 
 $client = new Google_Client();
 $client->setAuthConfig('client_secret.json');
@@ -45,8 +47,8 @@ foreach($accounts as $account) {
         <?php 
             $optParams = array(
                 'metric' => array(
-                'CLICKS',
-                'AD_REQUESTS_CTR', 'COST_PER_CLICK', 'AD_REQUESTS_RPM', 'EARNINGS'),
+                'PAGE',
+                'IMPRESSIONS', 'CLICKS', 'PAGE_VIEWS_RPM', 'IMPRESSIONS_RPM', 'EARNINGS'),
                 'dimension' => 'DATE',
                 'sort' => '+DATE',
                 'filter' => array(
