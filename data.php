@@ -3,7 +3,7 @@
 session_start();
 require('vendor/autoload.php');
 //$mysqli = new mysqli('127.0.0.1', 'your_user', 'your_pass', 'sakila');
-$_SESSION['access_token']='ya29.Glu_BQU-pA0QF9OrZvYtPGQtRhang6AJfQBMOzM7Y_b17RzgmmDsbCIoDG9xr5axt-Ql2HWlSwE7PaM9Fpr8Ljbf7nLZKIAGzGByNgZtYLNUOyclHFPEAuAtYA25';
+$_SESSION['access_token']='ya29.GlvABZICOmRnkIFGGtJj5ytCL9pSxSyIE6CA0IjEMdyyiPPZqYfAsphYcbnsW9wOzZlG0-NwytjMYQ_7HGvvOjzv3aMSlPz7jvwjN7E5aJAxc2TJCR1r6N1UYwWS';
 if(! isset($_SESSION['access_token'])) {
     header('Location: index.php');
     exit;
@@ -39,25 +39,29 @@ foreach($accounts as $account) {
         foreach($urlChannels as $urlChannel) {
 
             $urlChannelId = $urlChannel->id;
-            
             ?>
 
             <h3>Url channel id: <?php echo $urlChannelId; ?> </h3>
             <h4>Url pattern: <?php echo $urlChannel->urlPattern; ?></h4>
         <?php 
             $optParams = array(
+                'useTimezoneReporting' => true,
                 'metric' => array(
                 'PAGE',
-                'IMPRESSIONS', 'CLICKS', 'PAGE_VIEWS_RPM', 'IMPRESSIONS_RPM', 'EARNINGS'),
-                'dimension' => 'DATE',
+                'IMPRESSIONS', 'CLICKS', 'PAGE_VIEWS', 'IMPRESSIONS_RPM', 'EARNINGS'),
+                'dimension' => array('DATE'),
                 'sort' => '+DATE',
                 'filter' => array(
                 'AD_CLIENT_ID==' . $adClientId,
                 'URL_CHANNEL_ID==' . $urlChannelId
                 )
             );
-            $startDate = 'today-7d';
+            /*
+            $startDate = 'today-1d';
             $endDate = 'today-1d';
+            */
+            $startDate = '2018-05-16';
+            $endDate = '2018-05-18';
             $report = $adsense->accounts_reports->generate($accountId, $startDate,
             $endDate, $optParams);
 
