@@ -69,6 +69,7 @@ foreach($accounts as $account) {
                 ?>
                 <table>
                     <tr>
+                        <th>URL Channel</th>
                         <?php foreach($report['headers'] as $header): ?>
                                 <th><?php echo $header['name']; ?></th>
                         <?php endforeach; ?>
@@ -83,6 +84,7 @@ foreach($accounts as $account) {
                         */
                     ?>
                         <tr>
+                            <td><?php echo $urlChannel->urlPattern; ?>
                             <?php foreach($row as $column): ?>
                                 <td><?php echo $column; ?></td>
                             <?php endforeach; ?>
