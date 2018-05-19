@@ -3,7 +3,7 @@
 session_start();
 require('vendor/autoload.php');
 //$mysqli = new mysqli('127.0.0.1', 'your_user', 'your_pass', 'sakila');
-$_SESSION['access_token']='ya29.GlvABZICOmRnkIFGGtJj5ytCL9pSxSyIE6CA0IjEMdyyiPPZqYfAsphYcbnsW9wOzZlG0-NwytjMYQ_7HGvvOjzv3aMSlPz7jvwjN7E5aJAxc2TJCR1r6N1UYwWS';
+//$_SESSION['access_token']='ya29.GlvABZICOmRnkIFGGtJj5ytCL9pSxSyIE6CA0IjEMdyyiPPZqYfAsphYcbnsW9wOzZlG0-NwytjMYQ_7HGvvOjzv3aMSlPz7jvwjN7E5aJAxc2TJCR1r6N1UYwWS';
 if(! isset($_SESSION['access_token'])) {
     header('Location: index.php');
     exit;
@@ -15,8 +15,10 @@ if(! isset($_SESSION['access_token'])) {
 $client = new Google_Client();
 $client->setAuthConfig('client_secret.json');
 $client->setAccessType("offline");
-$client->setIncludeGrantedScopes(true);
+$client->setApprovalPrompt("force");
+//$client->setIncludeGrantedScopes(true);
 $client->setAccessToken($access_token);
+$client->getAccessToken();
 
 $adsense = new Google_Service_AdSense($client);
 

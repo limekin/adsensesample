@@ -7,7 +7,7 @@ $client = new Google_Client();
 $client->setAuthConfig('client_secret.json');
 $client->setAccessType("offline");        // offline access
 $client->setApprovalPrompt("force");
-$client->setIncludeGrantedScopes(true);   // incremental auth
+//$client->setIncludeGrantedScopes(true);   // incremental auth
 $client->addScope(Google_Service_AdSense::ADSENSE_READONLY);
 //$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/oauth_callback.php');
 $authUrl = $client->createAuthUrl();
